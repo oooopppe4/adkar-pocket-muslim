@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { CategoryKey } from '@/pages/Index';
 
 interface Dhikr {
@@ -29,20 +29,36 @@ const categoryTitles = {
 
 export const AdhkarViewer = ({ category, adhkar, onBack }: AdhkarViewerProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentCount, setCurrentCount] = useState(0);
 
   const nextDhikr = () => {
     if (currentIndex < adhkar.length - 1) {
       setCurrentIndex(currentIndex + 1);
+      setCurrentCount(0); // Reset count when moving to next dhikr
     }
   };
 
   const prevDhikr = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
+      setCurrentCount(0); // Reset count when moving to previous dhikr
     }
   };
 
+  const incrementCount = () => {
+    const maxCount = currentDhikr.repetition || 1;
+    if (currentCount < maxCount) {
+      setCurrentCount(currentCount + 1);
+    }
+  };
+
+  const resetCount = () => {
+    setCurrentCount(0);
+  };
+
   const currentDhikr = adhkar[currentIndex];
+  const maxRepetition = currentDhikr.repetition || 1;
+  const isCompleted = currentCount >= maxRepetition;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-green-100">
@@ -86,12 +102,51 @@ export const AdhkarViewer = ({ category, adhkar, onBack }: AdhkarViewerProps) =>
                 {currentDhikr.arabic}
               </div>
               
-              {/* Repetition */}
+              {/* Repetition and Counter */}
               {currentDhikr.repetition && (
-                <div className="bg-amber-100 border border-amber-200 rounded-lg p-3 inline-block">
-                  <span className="text-amber-800 font-medium text-sm">
-                    يُقال {currentDhikr.repetition} مرة
-                  </span>
+                <div className="space-y-4">
+                  <div className="bg-amber-100 border border-amber-200 rounded-lg p-3 inline-block">
+                    <span className="text-amber-800 font-medium text-sm">
+                      يُقال {currentDhikr.repetition} مرة
+                    </span>
+                  </div>
+                  
+                  {/* Counter Section */}
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6">
+                    <div className="flex items-center justify-center space-x-4">
+                      <Button
+                        onClick={resetCount}
+                        variant="outline"
+                        size="sm"
+                        className="border-emerald-300 text-emerald-700 hover:bg-emerald-100"
+                      >
+                        <RotateCcw className="h-4 w-4" />
+                      </Button>
+                      
+                      <div className="text-center">
+                        <div className={`text-4xl font-bold mb-2 ${isCompleted ? 'text-green-600' : 'text-emerald-700'}`}>
+                          {currentCount} / {maxRepetition}
+                        </div>
+                        {isCompleted && (
+                          <div className="text-green-600 font-medium text-sm">
+                            ✓ مكتمل
+                          </div>
+                        )}
+                      </div>
+                      
+                      <Button
+                        onClick={incrementCount}
+                        disabled={isCompleted}
+                        className={`px-8 py-3 text-lg font-medium ${
+                          isCompleted 
+                            ? 'bg-green-600 hover:bg-green-700' 
+                            : 'bg-emerald-600 hover:bg-emerald-700'
+                        } text-white`}
+                      >
+                        {isCompleted ? 'مكتمل' : 'عدّ'}
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               )}
               
@@ -124,7 +179,10 @@ export const AdhkarViewer = ({ category, adhkar, onBack }: AdhkarViewerProps) =>
               {adhkar.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentIndex(index)}
+                  onClick={() => {
+                    setCurrentIndex(index);
+                    setCurrentCount(0);
+                  }}
                   className={`w-3 h-3 rounded-full transition-colors ${
                     index === currentIndex 
                       ? 'bg-emerald-600' 
