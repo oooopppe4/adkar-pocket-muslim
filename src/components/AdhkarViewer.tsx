@@ -104,48 +104,50 @@ export const AdhkarViewer = ({ category, adhkar, onBack }: AdhkarViewerProps) =>
               
               {/* Repetition and Counter */}
               {currentDhikr.repetition && (
-                <div className="space-y-4">
-                  <div className="bg-amber-100 border border-amber-200 rounded-lg p-3 inline-block">
+                <div className="space-y-6">
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 inline-block">
                     <span className="text-amber-800 font-medium text-sm">
                       يُقال {currentDhikr.repetition} مرة
                     </span>
                   </div>
                   
-                  {/* Counter Section */}
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-6">
-                    <div className="flex items-center justify-center space-x-4">
-                      <Button
-                        onClick={resetCount}
-                        variant="outline"
-                        size="sm"
-                        className="border-emerald-300 text-emerald-700 hover:bg-emerald-100"
-                      >
-                        <RotateCcw className="h-4 w-4" />
-                      </Button>
-                      
-                      <div className="text-center">
-                        <div className={`text-4xl font-bold mb-2 ${isCompleted ? 'text-green-600' : 'text-emerald-700'}`}>
-                          {currentCount} / {maxRepetition}
-                        </div>
-                        {isCompleted && (
-                          <div className="text-green-600 font-medium text-sm">
-                            ✓ مكتمل
-                          </div>
-                        )}
+                  {/* Modern Counter Section */}
+                  <div className="flex items-center justify-center space-x-6">
+                    <Button
+                      onClick={resetCount}
+                      variant="ghost"
+                      size="icon"
+                      className="h-10 w-10 rounded-full text-gray-500 hover:text-emerald-600 hover:bg-emerald-50"
+                    >
+                      <RotateCcw className="h-4 w-4" />
+                    </Button>
+                    
+                    <div className="text-center">
+                      <div className={`text-3xl font-light mb-1 ${isCompleted ? 'text-green-600' : 'text-emerald-700'}`}>
+                        {currentCount}
+                        <span className="text-lg text-gray-400 mx-2">/</span>
+                        <span className="text-lg text-gray-600">{maxRepetition}</span>
                       </div>
-                      
-                      <Button
-                        onClick={incrementCount}
-                        disabled={isCompleted}
-                        className={`px-8 py-3 text-lg font-medium ${
-                          isCompleted 
-                            ? 'bg-green-600 hover:bg-green-700' 
-                            : 'bg-emerald-600 hover:bg-emerald-700'
-                        } text-white`}
-                      >
-                        {isCompleted ? 'مكتمل' : 'عدّ'}
-                      </Button>
+                      {isCompleted && (
+                        <div className="text-green-600 font-medium text-sm">
+                          ✓ مكتمل
+                        </div>
+                      )}
                     </div>
+                    
+                    <button
+                      onClick={incrementCount}
+                      disabled={isCompleted}
+                      className={`h-14 w-14 rounded-full transition-all duration-200 border-2 ${
+                        isCompleted 
+                          ? 'bg-green-50 border-green-200 text-green-400 cursor-not-allowed' 
+                          : 'bg-white border-emerald-300 text-emerald-600 hover:bg-emerald-50 hover:border-emerald-400 active:scale-95 shadow-sm hover:shadow-md'
+                      }`}
+                    >
+                      <span className="font-medium">
+                        {isCompleted ? '✓' : '+'}
+                      </span>
+                    </button>
                   </div>
                 </div>
               )}
