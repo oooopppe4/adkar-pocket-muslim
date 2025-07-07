@@ -1,73 +1,80 @@
-# Welcome to your Lovable project
 
-## Project info
+# Adhkar Muslim App
 
-**URL**: https://lovable.dev/projects/0709039a-d391-4c88-a7e7-2fc820ce6001
+A beautiful and responsive Islamic Adhkar (remembrance) application built with React, TypeScript, and Tailwind CSS.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Morning Adhkar** (أذكار الصباح)
+- **Evening Adhkar** (أذكار المساء)
+- **After Prayer Adhkar** (أذكار بعد الصلاة)
+- **Before Sleep Adhkar** (أذكار النوم)
+- **Entering Home Adhkar** (دخول المنزل)
+- **Exiting Home Adhkar** (الخروج من المنزل)
 
-**Use Lovable**
+## Technology Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0709039a-d391-4c88-a7e7-2fc820ce6001) and start prompting.
+- React 18
+- TypeScript
+- Tailwind CSS
+- Vite
+- Shadcn/UI Components
+- Lucide React Icons
 
-Changes made via Lovable will be committed automatically to this repo.
+## Getting Started
 
-**Use your preferred IDE**
+1. Clone the repository:
+```bash
+git clone https://github.com/oooopppe4/adhkar-app.git
+cd adhkar-app
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. Install dependencies:
+```bash
+npm install
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Build for production:
+```bash
+npm run build
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Project Structure
 
-**Use GitHub Codespaces**
+```
+src/
+├── components/
+│   ├── ui/           # Shadcn UI components
+│   ├── AdhkarViewer.tsx
+│   ├── AdhkarCategory.tsx
+│   ├── Header.tsx
+│   └── NavigationBar.tsx
+├── data/
+│   └── adhkarData.ts # All adhkar content
+├── pages/
+│   ├── Index.tsx
+│   └── NotFound.tsx
+└── main.tsx
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Features
 
-## What technologies are used for this project?
+- Responsive design that works on all devices
+- Arabic text with transliteration and English translation
+- Interactive counter for repeated adhkar
+- Beautiful gradients and Islamic-themed design
+- Navigation between different categories
+- Progress tracking for each dhikr
 
-This project is built with:
+## Contributing
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Feel free to contribute to this project by submitting pull requests or opening issues.
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/0709039a-d391-4c88-a7e7-2fc820ce6001) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is open source and available under the MIT License.
